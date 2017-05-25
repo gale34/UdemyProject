@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/TextOneOOne.unity
+  isLoaded: 1
+  isActive: 1

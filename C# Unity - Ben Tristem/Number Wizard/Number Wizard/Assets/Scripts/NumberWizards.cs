@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NumberWizards : MonoBehaviour
 {
     int max;
     int min;
     int guess;
+    public int maxGuessesAllowed = 5;
+
+    public Text text;
 
     // Use this for initialization
     void Start()
@@ -18,50 +23,32 @@ public class NumberWizards : MonoBehaviour
     {
         max = 1000;
         min = 1;
-        guess = 500;
-
-
-        max = max + 1;
-
-        print ("==========================");
-        print("Welcome to Number Wizard");
-        print("Pick a number in your head, but don`t tell me!");
-
-
-
-        print("The highest number you can pick is " + max);
-        print("The lowest number you can pick it " + min);
-
-        print("Is the number higher or lower than " + guess + "?");
-        print("Up = higher, down = lower, return = equal");
+        NextGuess();
     }
    
-    // Update is called once per frame
-    void Update()
+    public void GuessHigher()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            //print("up arrow pressed");
-            min = guess;
-            NextGuess();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            print("down arrow pressed");
-            max = guess;
-            NextGuess();
-        }
-        else if (Input.GetKeyDown(KeyCode.Return))
-        {
-            print("I won!");
-            StartGame();
-        }
+        min = guess;
+        NextGuess();
+    }
+
+    public void GuessLower()
+    {
+        max = guess;
+        NextGuess();
     }
 
     void NextGuess()
     {
-        guess = (max + min) / 2;
-        print("Higher or lower than" + guess);
-        print("Up = higher, down = lower, return = equal");
+        guess = Random.Range(min, max + 1);
+
+        text.text = guess.ToString();
+
+        maxGuessesAllowed -= 1;
+
+        if(maxGuessesAllowed <= 0)
+        {
+            SceneManager.LoadScene("Win");
+        }
     }
 }

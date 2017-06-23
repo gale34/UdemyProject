@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e0330ad72f656e64fb44334b99def012
+timeCreated: 1498226657
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BlockBit
+  fontNames:
+  - BlockBit
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

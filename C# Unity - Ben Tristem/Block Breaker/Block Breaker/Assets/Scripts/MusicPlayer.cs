@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour {
 
+    static MusicPlayer instance = null;
+
+    void Awake()
+    {
+        Debug.Log("Music player Awake " + GetInstanceID());
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            print("Duplicate music player self-destructing!");
+        }
+        else
+        {
+            instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
+        }
+
+    }
+    // Use this for initialization
+    
 	// Use this for initialization
 	void Start () {
-        GameObject.DontDestroyOnLoad(gameObject);
+        Debug.Log("Music player Start " + GetInstanceID());
+
+        
 	}
 	
 	// Update is called once per frame

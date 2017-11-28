@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour {
 
-    
+    public AudioClip crack;
     public Sprite[] hitSprites;
     public static int breakableCount = 0;
+    
 
     private int timesHit;
     private LevelManager levelManager;
@@ -30,6 +31,7 @@ public class Brick : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        AudioSource.PlayClipAtPoint(crack, transform.position);
         if(isBreakable)
         {
             HandleHits();

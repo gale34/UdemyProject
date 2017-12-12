@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject projectile;
     public float projectileSpeed;
     public float firingRate = 0.2f;
+    public float health = 250f;
     // Use this for initialization
 
     float xmin;
@@ -30,7 +31,8 @@ public class PlayerController : MonoBehaviour {
 	
     void Fire()
     {
-        GameObject beam = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+        Vector3 startPosition = transform.position + new Vector3(0f, 1f, 0f);
+        GameObject beam = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
         beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);
     }
 	// Update is called once per frame
@@ -70,5 +72,20 @@ public class PlayerController : MonoBehaviour {
         float newY = Mathf.Clamp(this.transform.position.y, ymin, ymax);
         transform.position = new Vector3(newX, newY, transform.position.z);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Projectile missile = collision.gameObject.GetComponent<Projectile>();
+
+        if (missile)
+        {
+            health -= missile.GetDamage();
+            missile.Hit();
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
